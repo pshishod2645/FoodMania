@@ -7,6 +7,6 @@
 
 ## Usage(Tested on ubuntu 18.04)
 1. Clone or Fetch this repo to your local machine.
-2. To start the server go to the repo directory in terminal and type `python3 manage.py runserver`. Note:Keep this running as long as you are website.
+2. To start the server go to the repo directory in terminal and type `python3 manage.py runserver`. Note:Keep this running as long as you are using the website.
 3. Now open browser and visit `127.0.0.1:8000/`. This is the home-page of this web-site.(locally).
 4. Navigate like a normal web-site.

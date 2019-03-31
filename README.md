@@ -6,6 +6,8 @@
 2. **Django(2.1 +)** needs to be installed, if it is not, open terminal and type `pip3 install Django`.
 3. This code was written using **Python 3.6.7** and **Django 2.1.7**.
 
+
+
 ## Usage(Tested on ubuntu 18.04)
 1. Clone or Fetch this repo to your local machine.
 2. To start the server go to the repo directory in terminal and type `python3 manage.py runserver`. Note:Keep this running as long as you are using the website.

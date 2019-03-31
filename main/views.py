@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import foodmania
+from .forms import SignUpForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 def homepage(request):
 	return render(request=request,
@@ -12,7 +17,7 @@ def homepage(request):
 
 def sign_up(request):
 	if request.method == "POST":
-		form = UserCreationForm(request.POST)
+		form = SignUpForm(request.POST)
 		if form.is_valid():
 			user=form.save()
 			username = form.cleaned_data.get('username')
@@ -25,7 +30,7 @@ def sign_up(request):
 				messages.error(request,f"{msg}: {form.error_messages[msg]}")
 			return render(request = request,template_name = "main/sign-up.html", context={"form":form})
 
-	form = UserCreationForm
+	form = SignUpForm()
 	return render(
 		request=request,
 		template_name='main/sign-up.html',
@@ -55,4 +60,16 @@ def login_request(request):
     form = AuthenticationForm()
     return render(request = request,
                     template_name = "main/login.html",
-                    context={"form":form})
+                    context={"form":form} )
+                    
+
+#display User Profile
+
+def get_user_profile(request, username) : 
+	user = User.objects.get(username = username)
+	return render(request, 
+					template_name = 'main/user_profile.html',
+					context = {'user' : user} )
+
+#end 
+

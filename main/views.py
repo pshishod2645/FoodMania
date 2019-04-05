@@ -71,6 +71,24 @@ def login_request(request):
                     context={"form":form} )
 
 
+#Restaruant Search
+
+def search(request) : 
+	if request.method == 'POST' : 
+		restaurant_name = request.POST.get('search')
+		try :
+			status = Restaurant.objects.filter(Restaurant_Name__icontains = restaurant_name)
+		except Restaurant.DoesNotExist : 
+			status = None
+		if status : 
+			return render(request, "main/search.html", {"restaurants" : status} )
+		else : 
+			messages.info(request, f"Your query didn't match any results. Try with another keywords.")
+			return redirect('/')
+	else : 
+		return render(request, "main/search.html", {})
+		
+		
 #display User Profile
 
 def get_user_profile(request) : 
@@ -81,5 +99,6 @@ def get_user_profile(request) :
 def about(request):
 	return render(request,
 					template_name='main/about.html')
+					
 #end 
 
